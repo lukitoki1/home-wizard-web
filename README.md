@@ -1,7 +1,6 @@
-# Mantine Next.js template
+# household-genie-web
 
-This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
-If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
+A repository of the Next.js web app (Frontend) for Household Genie.
 
 ## Features
 
@@ -35,3 +34,9 @@ This template comes with the following features:
 - `storybook` – starts storybook dev server
 - `storybook:build` – build production storybook bundle to `storybook-static`
 - `prettier:write` – formats all files with Prettier
+
+## Acknowledgement
+
+This repository is based on a template provided by Mantine: [Template](https://github.com/mantinedev/next-app-template).
+
+The template had preconfigured [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
