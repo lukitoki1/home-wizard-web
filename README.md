@@ -2,6 +2,14 @@
 
 A repository of the Next.js web app (Frontend) for Household Genie.
 
+## Getting started
+
+`yarn` to install all dependencies.
+
+Optionally `yarn build` to eliminate the error:
+
+> must be built because it never has been before or the last one failed
+
 ## Features
 
 This template comes with the following features:
