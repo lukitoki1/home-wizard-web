@@ -1,6 +1,6 @@
-# household-genie-web
+# home-wizard-web
 
-A repository of the Next.js web app (Frontend) for Household Genie.
+A repository of the Next.js web app (Frontend) for Home Wizard.
 
 ## Getting started
 
