@@ -22,6 +22,12 @@ This template comes with the following features:
 
 ## npm scripts
 
+ Common scripts:
+
+1. `yarn dev` - start dev server
+2. `yarn fix` - prettify and reformat
+3. `yarn test` - perform linting and run all tests
+
 ### Build and dev scripts
 
 - `dev` – start dev server
