@@ -1,11 +1,11 @@
 import { Text, Title } from '@mantine/core';
 import useST from '@/lib/i18n/server';
-import { LngParams } from '@/lib/types/params';
 import classes from './Welcome.module.css';
+import { LngParams } from '@/lib/i18n/types';
 
-type Attrs = LngParams;
+interface Params extends LngParams {}
 
-export async function Welcome({ lng }: Attrs) {
+export async function Welcome({ lng }: Params) {
   const { t } = await useST(lng, 'welcome');
 
   return (

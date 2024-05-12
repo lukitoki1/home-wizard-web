@@ -6,15 +6,17 @@ import useCT, { useLanguage } from '@/lib/i18n/client';
 import { logger } from '@/lib/logger';
 import { isServer } from '@/lib/utils/isServer';
 
-type Props = {
-  serverLng: string;
-};
+import { LngParams } from '@/lib/i18n/types';
 
-export const LanguageToggle = ({ serverLng }: Props) => {
+interface Params extends LngParams {}
+
+export const LanguageToggle = ({ lng: serverLng }: Params) => {
   const { i18n, t } = useCT(serverLng);
   const { lng, switchLng } = useLanguage(i18n);
 
-  logger.info(`translation is: ${t('language')}, server is ${isServer}`);
+  logger.info(
+    `translation is: ${t('language')}, server is ${isServer}, serverLng is ${serverLng}, lng is ${lng}`
+  );
 
   return (
     <footer style={{ marginTop: 50 }}>

@@ -11,7 +11,7 @@ export default function RootLayout({ children, params: { lng } }: PageParams) {
   return (
     <Container>
       {children}
-      <LanguageToggle serverLng={lng} />
+      <LanguageToggle lng={lng} />
     </Container>
   );
 }

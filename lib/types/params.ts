@@ -1,11 +1,8 @@
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import React from 'react';
-
-export type LngParams = {
-  lng: string;
-};
+import { LngParams } from '@/lib/i18n/types';
 
 export type PageParams = {
   children: React.ReactNode;
-} & LngParams &
-  Params;
+  params: LngParams & Params;
+};

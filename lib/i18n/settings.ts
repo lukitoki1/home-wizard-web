@@ -1,7 +1,15 @@
-export const fallbackLanguage = 'en';
-export const languages = [fallbackLanguage, 'de'];
+export enum Languages {
+  // first language becomes the default via resolution of the fallbackLanguage const
+  en = 'en',
+  de = 'de',
+}
+
+export const languages = Object.keys(Languages);
+
+export const fallbackLanguage = languages[0];
 
 export const defaultNamespace = 'translation';
+
 export const cookieName = 'i18next';
 
 export const getLocalesPath = (language: string, namespace: string) =>

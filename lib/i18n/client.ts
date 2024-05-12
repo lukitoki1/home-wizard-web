@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import { isServer } from '../utils/isServer';
 import { cookieName, getLocalesPath, getOptions, languages } from './settings';
 import { logger } from '@/lib/logger';
-import { LngParams } from '@/lib/types/params';
 import { lngPath } from '@/lib/i18n/utils';
+import { LngParams } from '@/lib/i18n/types';
 
 // on the client side normal singleton is ok
 i18next
@@ -54,6 +54,10 @@ export default function useCT<
   if (isServer && lng !== i18nInstance.resolvedLanguage) {
     i18nInstance.changeLanguage(lng);
   }
+
+  useEffect(() => {
+    i18nInstance.changeLanguage(lng);
+  }, [lng]);
 
   return i18nPackage;
 }
