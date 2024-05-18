@@ -2,30 +2,30 @@
 
 import { Select } from '@mantine/core';
 import { languages } from '@/lib/i18n/settings';
-import { useCT, useLanguage } from '@/lib/i18n/client';
 import { LngParams } from '@/lib/i18n/types';
-import { logger } from '@/lib/logger';
-import { isServer } from '@/lib/utils/isServer';
+import { changeLanguage } from '@/components/LanguageToggle/actions';
+import { useCT } from '@/lib/i18n/client';
 
 interface Params extends LngParams {}
 
-export const LanguageToggle = ({ lng: serverLng }: Params) => {
-  const { i18n, t } = useCT(serverLng);
-  const { lng, switchLng } = useLanguage(i18n);
+export function LanguageToggle({ lng: oldLng }: Params) {
+  const { t } = useCT(oldLng);
 
-  logger.info(
-    `translation is: ${t('language')}, server is ${isServer}, serverLng is ${serverLng}, lng is ${lng}`
-  );
+  async function changeLng(newLng: string | null) {
+    await changeLanguage(oldLng, newLng);
+  }
 
   return (
-    <Select
-      mt={50}
-      label={t('language')}
-      maw={300}
-      mx="auto"
-      data={languages}
-      value={lng}
-      onChange={switchLng}
-    />
+    <form>
+      <Select
+        mt={50}
+        label={t('language')}
+        maw={300}
+        mx="auto"
+        data={languages}
+        value={oldLng}
+        onChange={changeLng}
+      />
+    </form>
   );
-};
+}

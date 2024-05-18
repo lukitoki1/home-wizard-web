@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookieName, fallbackLanguage, languages } from './lib/i18n/settings';
 import { logger } from '@/lib/logger';
 import { lngPath } from '@/lib/i18n/utils';
+import { urlHeaderName } from '@/lib/values/headers';
 
 acceptLanguage.languages(languages);
 
@@ -55,12 +56,22 @@ function resolveLng(req: NextRequest) {
  * @param req NextRequest object
  */
 export function middleware(req: NextRequest) {
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set(urlHeaderName, req.url);
+
+  const resp = NextResponse.next({
+    request: {
+      // Apply new request headers
+      headers: requestHeaders,
+    },
+  });
+
   if (isResPath(req.nextUrl.pathname)) {
-    return NextResponse.next();
+    return resp;
   }
 
   if (isPathLngSupported(req.nextUrl.pathname)) {
-    return NextResponse.next();
+    return resp;
   }
 
   logger.info('middleware running');
