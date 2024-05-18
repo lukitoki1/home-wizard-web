@@ -5,7 +5,7 @@ import { useCounter } from '@mantine/hooks';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
 import { useCT } from '@/lib/i18n/client';
 import { PageParams } from '@/lib/types/params';
-import { lngPath } from '@/lib/i18n/utils';
+import { getLngPath } from '@/lib/i18n/utils';
 import LinkButton from '@/components/LinkButton/LinkButton';
 
 export default function Page({ params: { lng } }: PageParams) {
@@ -37,7 +37,7 @@ export default function Page({ params: { lng } }: PageParams) {
           <IconPlus />
         </Button>
       </Button.Group>
-      <LinkButton href={lngPath(lng, '/')}>{t('home')}</LinkButton>
+      <LinkButton href={getLngPath(lng, '/')}>{t('home')}</LinkButton>
     </Stack>
   );
 }

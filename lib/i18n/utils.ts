@@ -1,6 +1,6 @@
 import { fallbackLanguage } from '@/lib/i18n/settings';
 
-export function lngPath(lng: string = fallbackLanguage, path: string = '') {
+export function getLngPath(lng: string = fallbackLanguage, path: string = '') {
   return `/${lng}${path}`;
 }
 

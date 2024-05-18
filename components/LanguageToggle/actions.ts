@@ -4,7 +4,7 @@ import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { logger } from '@/lib/logger';
 import { cookieName, languages } from '@/lib/i18n/settings';
-import { lngPath } from '@/lib/i18n/utils';
+import { getLngPath } from '@/lib/i18n/utils';
 import { urlHeaderName } from '@/lib/values/headers';
 
 export async function changeLanguage(oldLng: string | undefined, newLng: string | null) {
@@ -32,7 +32,7 @@ export async function changeLanguage(oldLng: string | undefined, newLng: string 
 
   cookies().set(cookieName, newLng);
 
-  const link = url.replace(lngPath(oldLng), lngPath(newLng));
+  const link = url.replace(getLngPath(oldLng), getLngPath(newLng));
 
   logger.info(`changing language to ${newLng}`);
   logger.info(`redirecting to ${link}`);

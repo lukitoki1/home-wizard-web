@@ -2,7 +2,7 @@ import acceptLanguage from 'accept-language';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookieName, fallbackLanguage, languages } from './lib/i18n/settings';
 import { logger } from '@/lib/logger';
-import { lngPath } from '@/lib/i18n/utils';
+import { getLngPath } from '@/lib/i18n/utils';
 import { urlHeaderName } from '@/lib/values/headers';
 
 acceptLanguage.languages(languages);
@@ -15,7 +15,8 @@ export const config = {
 const isResPath = (path: string) =>
   path.includes('icon') || path.includes('chrome') || path.startsWith('/_next');
 
-const isPathLngSupported = (path: string) => languages.some((loc) => path.startsWith(lngPath(loc)));
+const isPathLngSupported = (path: string) =>
+  languages.some((loc) => path.startsWith(getLngPath(loc)));
 
 function resolveLng(req: NextRequest) {
   let lng: string | undefined | null;
@@ -80,5 +81,5 @@ export function middleware(req: NextRequest) {
 
   logger.info(`resolved language: ${lng}`);
 
-  return NextResponse.redirect(new URL(lngPath(lng, req.nextUrl.pathname), req.url));
+  return NextResponse.redirect(new URL(getLngPath(lng, req.nextUrl.pathname), req.url));
 }
