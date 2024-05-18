@@ -2,7 +2,7 @@ import { createInstance, FlatNamespace, KeyPrefix } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 import { FallbackNs } from 'react-i18next';
-import { getOptions, getLocalesPath } from './settings';
+import { fallbackLanguage, getLocalesPath, getOptions } from './settings';
 
 const initI18next = async (lng: string, ns: string | string[]) => {
   // on the server side we create a new instance for each render,
@@ -27,7 +27,7 @@ const initI18next = async (lng: string, ns: string | string[]) => {
 export default async function useST<
   Ns extends FlatNamespace,
   KPrefix extends KeyPrefix<FallbackNs<Ns>> = undefined,
->(lng: string, ns?: Ns, options: { keyPrefix?: KPrefix } = {}) {
+>(lng: string = fallbackLanguage, ns?: Ns, options: { keyPrefix?: KPrefix } = {}) {
   const i18nextInstance = await initI18next(
     lng,
     Array.isArray(ns) ? (ns as string[]) : (ns as string)

@@ -5,5 +5,5 @@ export type Language = keyof typeof Languages;
 export const lngParamName = 'lng';
 
 export type LngParams = {
-  [lngParamName]: Language;
+  [lngParamName]?: Language;
 };

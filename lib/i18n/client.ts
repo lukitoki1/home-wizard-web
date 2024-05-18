@@ -1,20 +1,19 @@
 'use client';
 
-import i18next, { FlatNamespace, i18n, KeyPrefix } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import resourcesToBackend from 'i18next-resources-to-backend';
-import { useCookies } from 'react-cookie';
+import i18nSingleton, { FlatNamespace, i18n as i18nInstanceType, KeyPrefix } from 'i18next';
 import { FallbackNs, initReactI18next, useTranslation, UseTranslationOptions } from 'react-i18next';
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import { useCookies } from 'react-cookie';
 import { isServer } from '../utils/isServer';
-import { cookieName, getLocalesPath, getOptions, languages } from './settings';
+import { cookieName, fallbackLanguage, getLocalesPath, getOptions, languages } from './settings';
 import { logger } from '@/lib/logger';
-import { lngPath } from '@/lib/i18n/utils';
 import { LngParams } from '@/lib/i18n/types';
+import { lngPath } from '@/lib/i18n/utils';
 
-// on the client side normal singleton is ok
-i18next
+i18nSingleton
   .use(initReactI18next)
   .use(LanguageDetector)
   .use(resourcesToBackend(getLocalesPath))
@@ -44,25 +43,27 @@ export const useParamsLanguage = (): string | undefined => {
  * @param options
  * @returns client-side translations object
  */
-export default function useCT<
+export function useCT<
   Ns extends FlatNamespace,
   KPrefix extends KeyPrefix<FallbackNs<Ns>> = undefined,
->(lng: string, ns?: Ns, options?: UseTranslationOptions<KPrefix>) {
-  const i18nPackage = useTranslation(ns, options);
-  const i18nInstance = i18nPackage.i18n;
+>(lng: string = fallbackLanguage, ns?: Ns, options?: UseTranslationOptions<KPrefix>) {
+  const { i18n, t } = useTranslation(ns, options);
 
-  if (isServer && lng !== i18nInstance.resolvedLanguage) {
-    i18nInstance.changeLanguage(lng);
+  if (isServer && lng !== i18n.resolvedLanguage) {
+    i18n.changeLanguage(lng);
   }
 
   useEffect(() => {
-    i18nInstance.changeLanguage(lng);
+    i18n.changeLanguage(lng);
   }, [lng]);
 
-  return i18nPackage;
+  return {
+    t,
+    i18n,
+  };
 }
 
-export function useLanguage(i18nInstance: i18n) {
+export function useLanguage(i18nInstance: i18nInstanceType) {
   const [, setCookie] = useCookies([cookieName]);
 
   const pathname = usePathname();

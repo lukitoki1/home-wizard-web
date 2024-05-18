@@ -3,7 +3,7 @@
 import { Button, Stack, Text, Title } from '@mantine/core';
 import { useCounter } from '@mantine/hooks';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
-import useCT from '@/lib/i18n/client';
+import { useCT } from '@/lib/i18n/client';
 import { PageParams } from '@/lib/types/params';
 import { lngPath } from '@/lib/i18n/utils';
 import LinkButton from '@/components/LinkButton/LinkButton';

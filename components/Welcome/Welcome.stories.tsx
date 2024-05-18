@@ -2,12 +2,9 @@ import { Meta } from '@storybook/react';
 import { Welcome } from './Welcome';
 import { buildMeta } from '@/lib/storybook/utils';
 
-type PagePropsAndCustomArgs = React.ComponentProps<typeof Welcome> & { lng: 'en' | 'de' };
-
-const meta: Meta<PagePropsAndCustomArgs> = {
+const meta: Meta<typeof Welcome> = {
   ...buildMeta({
     component: Welcome,
-    render: ({ lng }) => <Welcome lng={lng} />,
   }),
 };
 

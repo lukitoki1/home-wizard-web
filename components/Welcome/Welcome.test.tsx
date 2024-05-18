@@ -1,12 +1,12 @@
-import { render, screen } from '@/test-utils';
+import { screen } from '@testing-library/react';
 import { Welcome } from './Welcome';
+import { renderRSC } from '@/lib/test/render';
 
 describe('Welcome component', () => {
-  it('has correct Next.js theming section link', () => {
-    render(<Welcome />);
-    expect(screen.getByText('this guide')).toHaveAttribute(
-      'href',
-      'https://mantine.dev/guides/next/'
-    );
+  it('has correct text in EN', async () => {
+    await renderRSC(Welcome, { lng: 'en' });
+
+    expect(screen.getByText('Welcome to')).toBeDefined();
+    expect(screen.queryByText('notExistentText')).toBeNull();
   });
 });
