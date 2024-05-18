@@ -1,6 +1,6 @@
 import { Text, Title } from '@mantine/core';
 import useST from '@/lib/i18n/server';
-import classes from './Welcome.module.css';
+import classes from './Welcome.module.scss';
 import { LngParams } from '@/lib/i18n/types';
 
 interface Params extends LngParams {}
