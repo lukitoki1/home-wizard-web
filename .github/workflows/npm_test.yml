@@ -4,8 +4,9 @@ on:
   pull_request:
     branches:
       - '**'
-  branch:
-    - main
+  push:
+    branches:
+      - 'main'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
