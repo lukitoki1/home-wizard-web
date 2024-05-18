@@ -1,11 +1,18 @@
 import '@mantine/core/styles.css';
 import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { headers } from 'next/headers';
 import { theme } from '@/theme';
+import { urlHeaderName } from '@/lib/values/headers';
+import { getLngFromURL } from '@/lib/i18n/utils';
 
 export default function RootLayout({ children }: { children: any }) {
+  const url = headers().get(urlHeaderName);
+
+  const lng = getLngFromURL(url);
+
   return (
-    <html lang="en">
+    <html lang={lng}>
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
